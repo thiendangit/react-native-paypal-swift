@@ -1,6 +1,6 @@
 {
-  "name": "react-native-my-module-example",
-  "description": "Example app for react-native-my-module",
+  "name": "react-native-example",
+  "description": "Example app for react-native-paypal-swift",
   "version": "0.0.1",
   "private": true,
   "scripts": {

@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "react-native-my-module": ["./src/index"]
+      "react-native-paypal-swift": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

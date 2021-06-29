@@ -4,12 +4,12 @@
   "description": "my module",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
-  "types": "lib/typescript/index.d.ts",
+  "types": "lib/typescript/index",
   "react-native": "src/index",
   "source": "src/index",
   "files": [
-    "src",
-    "lib",
+    "src/",
+    "lib/",
     "android",
     "ios",
     "cpp",
@@ -33,11 +33,16 @@
   },
   "keywords": [
     "react-native",
+    "paypal",
+    "checkout",
+    "paypal-checkout",
+    "braintree",
+    "android",
     "ios",
-    "android"
+    "payment"
   ],
   "repository": "https://github.com/thiendangit/react-native-paypal-swift",
-  "author": "thiendangit <thiendangit1102@gmail.com> (https://github.com/thiendangit)",
+  "author": "thiendang <thiendangit1102@gmail.com> (https://github.com/thiendangit)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/thiendangit/react-native-paypal-swift/issues"
