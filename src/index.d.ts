@@ -27,7 +27,16 @@ declare module 'react-native-paypal-swift' {
     userAction?: UserActionType
   }
 
+  interface RequestBillingAgreement {
+    billingAgreementDescription?: string,
+    currencyCode?: string,
+    localeCode?: string,
+  }
+
+
   export type Paypal = {
     requestOneTimePayment: (clientToken: string, options: RequestOneTimePaymentType) => Promise<any>
+    requestBillingAgreement: (clientToken: string, options: RequestBillingAgreement) => Promise<any>,
+    requestDeviceData: (clientToken: string) => Promise<any>,
   };
 }

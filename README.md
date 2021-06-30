@@ -11,7 +11,8 @@ npm install react-native-paypal-swift or `yarn add react-native-paypal-swift`
 1. [iOS] Add `pod 'Braintree', '~> 4'` and `pod 'Braintree/DataCollector'` to your Podfile.
 1. [iOS] Run `pod install`
 1. [iOS] Register a URL scheme in Xcode (**must** always start with your Bundle Identifier and end in `.payments` - e.g. `your.app.id.payments`). See details [here](https://developers.braintreepayments.com/guides/paypal/client-side/ios/v4#register-a-url-type).
-1. [iOS] Edit your `AppDelegate.m` as follows:
+1. [iOS] Edit your `AppDelegate` as follows:
+   Objective C ~> AppDelegate.m
     ```objc
     #import "BraintreeCore.h"
     #import "BraintreePayPal.h"
@@ -50,9 +51,31 @@ npm install react-native-paypal-swift or `yarn add react-native-paypal-swift`
       }
     ```
 
-At this point you should be able to build both Android and iOS.
+     Swift ~> AppDelegate.swift
 
+     ```swift
+        func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+            BTAppSwitch.setReturnURLScheme("com.your-company.your-app.payments")
+            return true
+        }
 
+       // if you're using UISceneDelegate (introduced in iOS 13), call BTAppSwitch's handleOpenURLContext method from within the scene:openURLContexts scene delegate method.
+        func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+            URLContexts.forEach { context in
+                if context.url.scheme?.localizedCaseInsensitiveCompare("com.your-company.your-app.payments") == .orderedSame {
+                    BTAppSwitch.handleOpenURLContext(context)
+                }
+            }
+        }
+
+      // otherwise, if you aren't using UISceneDelegate, call BTAppSwitch's handleOpenURL method from within the application:openURL:options app delegate method.
+       func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+           if url.scheme?.localizedCaseInsensitiveCompare("com.your-company.your-app.payments") == .orderedSame {
+               return BTAppSwitch.handleOpen(url, options: options)
+           }
+           return false
+       }
+    ```
 
 ## Usage
 
@@ -62,11 +85,62 @@ Then you can execute the following code, for example reacting to a button press.
 
 
 ```js
-import {Paypal} from "react-native-paypal-swift";
+    import {Paypal} from "react-native-paypal-swift";
 
+    // ...
+    const CLIENT_TOKEN = useMemo<string>(() => 'sandbox_v29bk2j6_xxxxxxxxx', []);
+    // For one time payments
+   const requestOneTimePayment = useCallback(() => {
+       Paypal.requestOneTimePayment(CLIENT_TOKEN,
+         {
+           amount: '10',
+         },
+       ).then(resOneTimePayment => {
+            //   nonce,
+            //   payerId,
+            //   email ,
+            //   firstName,
+            //   lastName ,
+            //   phone,
+            //   billingAddress,
+            //   shippingAddress
+         console.log({ resOneTimePayment });
+       }).catch(err => {
+         console.log(err);
+       });
+     }, []);
+
+     const requestBillingAgreement = useCallback(() => {
+       Paypal.requestBillingAgreement(CLIENT_TOKEN,
+         {
+           billingAgreementDescription: 'Your agreement description',
+           currencyCode: 'GBP',
+           localeCode: 'en_GB',
+         },
+       ).then(resBillingAgreement => {
+            //   nonce,
+            //   payerId,
+            //   email ,
+            //   firstName,
+            //   lastName ,
+            //   phone,
+            //   billingAddress,
+            //   shippingAddress
+         console.log({ resBillingAgreement });
+       }).catch(err => {
+         console.log(err);
+       });
+     }, []);
+
+    const requestDeviceData = useCallback(() => {
+        Paypal.requestDeviceData(CLIENT_TOKEN).then(resDeviceData => {
+          alert(`Your correlation id: ${resDeviceData?.deviceData?.correlation_id}`);
+          console.log({ resDeviceData });
+        }).catch(err => {
+          console.log(err);
+        });
+      }, []);
 // ...
-
-Paypal.requestOneTimePayment((result : string) => console.log({ result }));
 ```
 
 ## Creating/Finding client token

@@ -62,6 +62,7 @@ static NSString *URLScheme;
   return YES;
 }
 
+// if you support only iOS 9+, add the following method
 - (BOOL)application:(UIApplication *)application
     openURL:(NSURL *)url
     sourceApplication:(NSString *)sourceApplication
@@ -73,6 +74,7 @@ static NSString *URLScheme;
     return NO;
 }
 
+// otherwise, if you support iOS 8, add the following method
 - (BOOL)application:(UIApplication *)application
     openURL:(NSURL *)url
     options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options

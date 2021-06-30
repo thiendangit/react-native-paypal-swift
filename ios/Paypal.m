@@ -14,5 +14,14 @@
                       requestOptions:(NSDictionary *)options
                       resolver: (RCTPromiseResolveBlock)resolve
                       rejecter:(RCTPromiseRejectBlock)reject)
+    RCT_EXTERN_METHOD(requestBillingAgreement:
+                  (NSString *)clientToken
+                  requestOptions:(NSDictionary *)options
+                  resolver: (RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
+    RCT_EXTERN_METHOD(requestDeviceData:
+                  (NSString *)clientToken
+                  resolver: (RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
 @end
 

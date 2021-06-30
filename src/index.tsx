@@ -4,8 +4,6 @@ type IntentType = 'order' | 'sale'
 type LandingPageType = 'login' | 'billing'
 type UserActionType = 'commit' | ''
 
-console.log({NativeModules});
-
 interface RequestOneTimePaymentType {
   amount?: string,
   billingAgreementDescription?: string,
@@ -29,8 +27,16 @@ interface RequestOneTimePaymentType {
   userAction?: UserActionType
 }
 
+interface RequestBillingAgreement {
+  billingAgreementDescription?: string,
+  currencyCode?: string,
+  localeCode?: string,
+}
+
 const Paypal: {
-  requestOneTimePayment: (clientToken: string, options: RequestOneTimePaymentType) => Promise<any>
+  requestOneTimePayment: (clientToken: string, options: RequestOneTimePaymentType) => Promise<any>,
+  requestBillingAgreement: (clientToken: string, options: RequestBillingAgreement) => Promise<any>,
+  requestDeviceData: (clientToken: string) => Promise<any>,
 } = NativeModules.Paypal;
 
 export {
