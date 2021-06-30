@@ -5,6 +5,7 @@
 #import "BTDataCollector.h"
 #import <Foundation/Foundation.h>
 #import <React/UIView+React.h>
+#import <React/RCTViewManager.h>
 
 #if __has_include(<Braintree/BraintreePayPal.h>)
 #import <Braintree/BTPayPalRequest.h>

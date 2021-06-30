@@ -2,7 +2,7 @@
 
 React Native library that implements PayPal [Checkout](https://developers.braintreepayments.com/guides/paypal/checkout-with-paypal/) flow using purely native code (swift).
 
-<img src="images/screenshot.png" alt="React Native library" width="300"/>
+<img src="images/screenshot.png" alt="React Native library" width="350"/>
 
 ## Installation
 
@@ -31,7 +31,7 @@ npm install react-native-paypal-swift or `yarn add react-native-paypal-swift`
       NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
       NSString *urlscheme = [NSString stringWithFormat:@"%@.payments", bundleIdentifier];
       URLScheme = urlscheme;
-      BTAppSwitch setReturnURLScheme:urlscheme];
+      [BTAppSwitch setReturnURLScheme:urlscheme];
     }
 
     // if you support only iOS 9+, add the following method
