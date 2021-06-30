@@ -21,6 +21,10 @@ npm install react-native-paypal-swift or `yarn add react-native-paypal-swift`
     #import "BraintreePayPal.h"
     #import "BTDataCollector.h"
 
+    static NSString *URLScheme;
+
+    @implementation AppDelegate
+
     - (BOOL)application:(UIApplication *)application
       didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     {
